@@ -63,7 +63,7 @@ class Bird:
         #     True, 
         #     False
         # )
-        self.img = self.imgs[(+5,0)]  # 右向きこうかとんをデフォ画像にする
+        self.img = self.imgs[(+5, 0)]  # 右向きこうかとんをデフォ画像にする
         self.rct = self.img.get_rect()
         self.rct.center = xy
 
