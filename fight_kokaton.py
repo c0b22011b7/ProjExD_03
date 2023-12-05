@@ -129,7 +129,6 @@ class Bomb:
 
 
 class Beam:
-    
     def __init__(self,bird: Bird):
         self.img = pg.image.load(f"{MAIN_DIR}/fig/beam.png")  # 左右反転
         self.rct = self.img.get_rect()
@@ -154,8 +153,8 @@ class Score:
     def update(self,snum,screen):
         self.img = self.font.render(f"スコア：{snum}", 0, (0, 0, 255))
         screen.blit(self.img, (100, HEIGHT-50))
-    
-            
+           
+         
 def main():
     pg.display.set_caption("たたかえ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))    
@@ -189,13 +188,14 @@ def main():
                 
         for i, bomb in enumerate(bombs):
             for j, beam in enumerate(beams):
-                if beam is not None and beam.rct.colliderect(bomb.rct):
-                        beams[j] = None
-                        bombs[i] = None
-                        sccount += 1
-                        bird.change_img(6,screen)
+                if  beam is not None and beam.rct.colliderect(bomb.rct):
+                    beams[j] = None
+                    bombs[i] = None
+                    sccount += 1
+                    bird.change_img(6,screen)
         bombs = [bomb for bomb in bombs if bomb is not None]  # Noneでない爆弾だけのリスト
         beams = [beam for beam in beams if beam is not None and beam.rct.centerx < WIDTH]
+        explosion = [ex for ex in explosion if ex.life > 0 ]
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
         score.update(sccount,screen)
